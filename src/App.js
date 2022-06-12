@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { Routes, Route } from 'react-router-dom';
+import NavigationBar from './components/navbar/NavigationBar';
+import StagnantChallenges from './pages/stagnant-challenges/StagnantChallenges';
+import ProposeChallenges from './pages/propose-challenges/ProposeChallenges';
+import CreateChallenges from './pages/create-challenges/CreateChallenges';
+import Home from './pages/home/Home';
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/challenges/stagnant-challenges"
+          element={<StagnantChallenges />}
+        />
+        <Route
+          path="/challenges/propose-challenges"
+          element={<ProposeChallenges />}
+        />
+        <Route
+          path="/challenges/create-challenges"
+          element={<CreateChallenges />}
+        />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

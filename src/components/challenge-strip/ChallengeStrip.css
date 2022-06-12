@@ -1,0 +1,33 @@
+.strip-outer-container {
+  display: flex;
+  gap: 0.1rem;
+  margin: 0.25rem;
+  background-color: #f4e2be;
+  border: 1px solid black;
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+.strip-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-name {
+  margin-left: 0.25rem;
+}
+
+.table-cell {
+  border-right: 1px solid black;
+}
+
+.challenge-strip-btn {
+  border-top: none;
+  border-right: none;
+  border-left: 1px solid black;
+  border-bottom: none;
+  background-color: #d99482;
+}
+
+.challenge-strip-btn:hover {
+  background-color: #535a7e;
+}
