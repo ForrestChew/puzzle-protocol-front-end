@@ -1,10 +1,17 @@
-import { useLogin } from '../../authentication/CryptoLoginLogic';
-
+import { CryptoAuth } from '../../authentication/CryptoAuth';
 const CryptoLogin = () => {
-  const { login } = useLogin();
+  const { authedAccount, login, isAuthenticated, user, cryptoLogout } =
+    CryptoAuth();
+
   return (
     <div>
-      <button onClick={login}>Login</button>
+      {authedAccount ? (
+        <button onClick={cryptoLogout}>
+          {authedAccount ? authedAccount : 'Logout'}
+        </button>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
     </div>
   );
 };
