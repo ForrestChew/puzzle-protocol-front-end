@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMoralisQuery } from 'react-moralis';
 
-const StagnantChallengesLogic = () => {
+const useStagnantChallenges = () => {
   const [challenges, setChallenges] = useState([]);
   const { data } = useMoralisQuery('StagnantChallenges');
   useEffect(() => {
@@ -14,4 +14,4 @@ const StagnantChallengesLogic = () => {
   return challenges;
 };
 
-export { StagnantChallengesLogic };
+export { useStagnantChallenges };

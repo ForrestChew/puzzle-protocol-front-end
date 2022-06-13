@@ -4,7 +4,7 @@ import {
   contractAbi,
 } from '../contract-interactions/contract-info.js';
 
-export const useGetContractInstance = () => {
+export const useContractInteractions = () => {
   const { Moralis } = useMoralis();
 
   // Returns read only instance of smart contract attached to the current signer.
@@ -31,5 +31,23 @@ export const useGetContractInstance = () => {
     );
     return puzzleProtoInstanceWithSigner;
   };
-  return { contractInstanceWithSigner, contractInstanceWithProvider };
+
+  const startSChallenge = async (challengeId) => {
+    const challengeOptions = {
+      contractAddress,
+      abi: contractAbi,
+      chain: 80001,
+      functionName: 'startChallenge',
+      params: {
+        _challengeId: challengeId,
+      },
+    };
+    await contractInstanceWithSigner.startChallenge(challengeOptions);
+  };
+
+  return {
+    contractInstanceWithSigner,
+    contractInstanceWithProvider,
+    startSChallenge,
+  };
 };

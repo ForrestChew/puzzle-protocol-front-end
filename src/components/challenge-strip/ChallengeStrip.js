@@ -1,7 +1,9 @@
 import { Button, Table } from 'react-bootstrap';
+import { useContractInteractions } from '../../hooks/useContractInteractions';
 import './ChallengeStrip.css';
 // challengeAttributes is an object
 const ChallengeStrip = ({ challengeAttributes, id }) => {
+  const { startSChallenge } = useContractInteractions();
   return (
     <div className="strip-outer-container">
       <div className="strip-inner-container">
@@ -39,7 +41,12 @@ const ChallengeStrip = ({ challengeAttributes, id }) => {
           </tbody>
         </Table>
       </div>
-      <Button className="challenge-strip-btn">Start</Button>
+      <Button
+        className="challenge-strip-btn"
+        onClick={() => startSChallenge(1)}
+      >
+        Start
+      </Button>
     </div>
   );
 };
