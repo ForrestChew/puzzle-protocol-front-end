@@ -1,10 +1,10 @@
-import { useStagnantChallenges } from '../../hooks/useStagnantChallenges';
+import { useChallenges } from '../../hooks/useChallenges';
 import ChallengeStrip from '../../components/challenge-strip/ChallengeStrip';
 import 'bootstrap/dist/css/bootstrap.css';
 import './StagnantChallenges.css';
 
 const StagnantChallenges = () => {
-  const getStagnantchallenges = useStagnantChallenges();
+  const getStagnantchallenges = useChallenges('StagnantChallenges', false);
   return (
     <div className="stagnant-challenges-container">
       {getStagnantchallenges.map((challenge, idx) => {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useMoralis } from 'react-moralis';
-import { useCryptoAuth } from '../hooks/useCryptoAuth';
 
 export const UserContext = React.createContext();
 

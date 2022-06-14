@@ -27,6 +27,9 @@ const NavigationBar = () => {
                   <NavDropdown.Item>Create Challenge</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
+              <LinkContainer to="/active-challenges">
+                <Nav.Link>Active Challenges</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
           <CryptoLogin />

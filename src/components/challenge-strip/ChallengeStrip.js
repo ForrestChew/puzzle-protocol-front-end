@@ -1,14 +1,22 @@
 import { Button, Table } from 'react-bootstrap';
 import { useContractInteractions } from '../../hooks/useContractInteractions';
-import { useDeleteChallenge } from '../../hooks/useDeleteChallenge';
+import { useMutateChallenge } from '../../hooks/useMutateChallenge';
 import './ChallengeStrip.css';
 // challengeAttributes is an object
+// id ---> is the challenge id as seen by users. Not it's id represented on the blockchain or DB.
 const ChallengeStrip = ({ challengeAttributes, id }) => {
   const { startSChallenge } = useContractInteractions();
-  const { destroyChallenge } = useDeleteChallenge();
+  const { activateChallenge } = useMutateChallenge(challengeAttributes.uid);
 
-  const startTheChallenge = async (uid) => {
-    await destroyChallenge(uid);
+  const handleChallengeStart = async () => {
+    try {
+      const { uid, wager } = challengeAttributes;
+      await startSChallenge(uid, wager).then(() => {
+        activateChallenge();
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -48,10 +56,7 @@ const ChallengeStrip = ({ challengeAttributes, id }) => {
           </tbody>
         </Table>
       </div>
-      <Button
-        className="challenge-strip-btn"
-        onClick={() => startTheChallenge(challengeAttributes.uid)}
-      >
+      <Button className="challenge-strip-btn" onClick={handleChallengeStart}>
         Start
       </Button>
     </div>
