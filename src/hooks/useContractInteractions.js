@@ -2,11 +2,10 @@ import { useMoralis } from 'react-moralis';
 import {
   contractAddress,
   contractAbi,
-} from '../contract-interactions/contract-info.js';
+} from '../contract-info/contract-info.js';
 
 export const useContractInteractions = () => {
   const { Moralis } = useMoralis();
-
   // Returns read only instance of smart contract attached to the current signer.
   const contractInstanceWithProvider = async () => {
     const provider = Moralis.web3;
@@ -20,10 +19,10 @@ export const useContractInteractions = () => {
   };
 
   // Returns read + write instance of smart contract attached to the current signer.
-  const contractInstanceWithSigner = async () => {
-    const provider = Moralis.web3;
-    const signer = provider.getSigner();
+  const contractInstanceWithSigner = () => {
     const ethers = Moralis.web3Library;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
     const puzzleProtoInstanceWithSigner = new ethers.Contract(
       contractAddress,
       contractAbi,
@@ -33,16 +32,19 @@ export const useContractInteractions = () => {
   };
 
   const startSChallenge = async (challengeId) => {
+    await Moralis.enableWeb3();
     const challengeOptions = {
-      contractAddress,
+      contractAddress: contractAddress,
       abi: contractAbi,
-      chain: 80001,
       functionName: 'startChallenge',
+      chain: 80001,
+      msgValue: 1,
       params: {
         _challengeId: challengeId,
       },
     };
-    await contractInstanceWithSigner.startChallenge(challengeOptions);
+    const txReceipt = await Moralis.executeFunction(challengeOptions);
+    console.log(txReceipt);
   };
 
   return {

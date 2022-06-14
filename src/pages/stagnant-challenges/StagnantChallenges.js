@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './StagnantChallenges.css';
 
 const StagnantChallenges = () => {
-  const challengesArray = useStagnantChallenges();
+  const getStagnantchallenges = useStagnantChallenges();
   return (
     <div className="stagnant-challenges-container">
-      {challengesArray.map((challenge, idx) => {
+      {getStagnantchallenges.map((challenge, idx) => {
         return (
           <ChallengeStrip
             key={idx}

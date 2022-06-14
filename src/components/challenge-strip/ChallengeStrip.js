@@ -1,9 +1,16 @@
 import { Button, Table } from 'react-bootstrap';
 import { useContractInteractions } from '../../hooks/useContractInteractions';
+import { useDeleteChallenge } from '../../hooks/useDeleteChallenge';
 import './ChallengeStrip.css';
 // challengeAttributes is an object
 const ChallengeStrip = ({ challengeAttributes, id }) => {
   const { startSChallenge } = useContractInteractions();
+  const { destroyChallenge } = useDeleteChallenge();
+
+  const startTheChallenge = async (uid) => {
+    await destroyChallenge(uid);
+  };
+
   return (
     <div className="strip-outer-container">
       <div className="strip-inner-container">
@@ -43,7 +50,7 @@ const ChallengeStrip = ({ challengeAttributes, id }) => {
       </div>
       <Button
         className="challenge-strip-btn"
-        onClick={() => startSChallenge(1)}
+        onClick={() => startTheChallenge(challengeAttributes.uid)}
       >
         Start
       </Button>
