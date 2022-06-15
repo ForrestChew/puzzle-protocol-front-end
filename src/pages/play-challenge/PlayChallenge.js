@@ -1,31 +1,85 @@
-import { useEffect, useContext } from 'react';
-import { useContractInteractions } from '../../hooks/useContractInteractions';
-import { useChallenges } from '../../hooks/useChallenges';
-import { UserContext } from '../../components/UserContextProvider';
+import { useState } from 'react';
+import { Button, Table } from 'react-bootstrap';
+import { useUserChallenges } from '../../hooks/useUserChallenges';
+import Challenge from './Challenge';
+import NoActiveChallenge from './NoActiveChallenge';
+import './PlayChallenge.css';
 
 const PlayChallenge = () => {
-  //   const [authedUser, setAuthedUser] = useContext(UserContext);
-  //   const { getUserChallenges } = useContractInteractions();
-  //   const activeChallenges = useChallenges(true);
-  //   useEffect(() => {
-  //     const test = async () => {
-  //       try {
-  //         activeChallenges.forEach(async (challenge, idx) => {
-  //           console.log(challenge);
-  //           const userChallenges = await getUserChallenges(
-  //             activeChallenges[idx].attributes.uid
-  //           );
-  //           if (activeChallenges.challenger === authedUser.userAddress) {
-  //             console.log(activeChallenges);
-  //           }
-  //         });
-  //       } catch (e) {
-  //         console.log(e);
-  //       }
-  //     };
-  //     test();
-  //   }, []);
-  //   return <div>PlayChallenge</div>;
+  const [challengeObject, setChallengeObject] = useState(null);
+  const userChallenges = useUserChallenges();
+  const continueChallenge = (challenge) => {
+    setChallengeObject(challenge);
+  };
+
+  return (
+    <>
+      <div className="play-challenge-page">
+        <div className="selection-bar">
+          <h3 className="title">Incomplete</h3>
+          {userChallenges.map((challenge, idx) => {
+            return (
+              <div key={idx} className="challenge-container">
+                <p className="challenge">{challenge.attributes.name}</p>
+                <Button
+                  className="btn"
+                  onClick={() => continueChallenge(challenge)}
+                >
+                  Continue
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+        <div className="puzzle-container">
+          {challengeObject !== null ? (
+            <Challenge challenge={challengeObject} />
+          ) : (
+            <NoActiveChallenge />
+          )}
+        </div>
+        {challengeObject !== null ? (
+          <div className="selection-bar stats">
+            <h3 className="title">Stats</h3>
+            <Table striped borderless hover size="sm">
+              <tbody>
+                <tr>
+                  <td>Wager</td>
+                  <td className="table-cell" style={{ color: 'green ' }}>
+                    {challengeObject.attributes.wager}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Payout</td>
+                  <td className="table-cell" style={{ color: 'green' }}>
+                    {challengeObject.attributes.payout}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Refund</td>
+                  <td className="table-cell" style={{ color: 'green' }}>
+                    {challengeObject.attributes.refundOnFlee}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Difficulty</td>
+                  <td className="table-cell" style={{ color: 'crimson' }}>
+                    {challengeObject.attributes.difficulty}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Attempts</td>
+                  <td>{challengeObject.attributes.amountOfGuesses}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
+    </>
+  );
 };
 
 export default PlayChallenge;

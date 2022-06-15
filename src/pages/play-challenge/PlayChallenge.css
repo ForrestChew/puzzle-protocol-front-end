@@ -1,0 +1,47 @@
+.play-challenge-page {
+  display: flex;
+}
+
+.title {
+  text-align: center;
+  padding: 0.5rem;
+  margin-bottom: 0;
+  text-decoration: underline;
+  border-bottom: 1px solid black;
+}
+.selection-bar {
+  flex-basis: 12%;
+  border-right: 1px solid black;
+}
+
+.challenge-container {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+.challenge {
+  margin-left: 1rem;
+}
+
+.btn {
+  justify-self: flex-end;
+}
+
+.puzzle-container {
+  margin: 3rem 4rem 3rem 4rem;
+  flex-basis: 45%;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats {
+  border-left: 1px solid black;
+}
+
+/* .info {
+  display: flex;
+} */

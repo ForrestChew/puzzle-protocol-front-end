@@ -1,9 +1,6 @@
-import { useContext } from 'react';
 import { useMoralis } from 'react-moralis';
-import { UserContext } from '../components/UserContextProvider';
 
 export const useCryptoAuth = () => {
-  const [authedUser, setAuthedUser] = useContext(UserContext);
   const { Moralis } = useMoralis();
 
   const checkUser = async () => {
