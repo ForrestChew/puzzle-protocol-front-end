@@ -1,7 +1,7 @@
 import OptionsMenu from './OptionsMenu';
 const Challenge = ({ challenge }) => {
   return (
-    <div>
+    <div className="puzzle-container">
       <h1>{challenge.attributes.name}</h1>
       <p>{challenge.attributes.puzzle}</p>
       <OptionsMenu />

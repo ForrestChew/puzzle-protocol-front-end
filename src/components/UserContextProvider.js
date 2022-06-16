@@ -17,7 +17,7 @@ const UserContextProvider = ({ children }) => {
       return {
         authed: true,
         userAddress: signerAddress,
-        userBalance: Number(signerBalance),
+        userBalance: Moralis.Units.FromWei(signerBalance),
       };
     } catch (e) {
       return { authed: false, messege: 'User not signed in' };

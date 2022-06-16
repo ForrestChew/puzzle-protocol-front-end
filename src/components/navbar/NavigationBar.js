@@ -7,7 +7,7 @@ import './NavigationBar.css';
 const NavigationBar = () => {
   return (
     <>
-      <Navbar variant="dark" expand="lg">
+      <Navbar variant="dark" fixed="top" expand="lg">
         <Container>
           <Navbar.Brand>Puzzle Protocol</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

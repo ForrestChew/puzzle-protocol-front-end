@@ -21,10 +21,7 @@ const PlayChallenge = () => {
             return (
               <div key={idx} className="challenge-container">
                 <p className="challenge">{challenge.attributes.name}</p>
-                <Button
-                  className="btn"
-                  onClick={() => continueChallenge(challenge)}
-                >
+                <Button onClick={() => continueChallenge(challenge)}>
                   Continue
                 </Button>
               </div>
@@ -45,25 +42,25 @@ const PlayChallenge = () => {
               <tbody>
                 <tr>
                   <td>Wager</td>
-                  <td className="table-cell" style={{ color: 'green ' }}>
+                  <td className="" style={{ color: 'green ' }}>
                     {challengeObject.attributes.wager}
                   </td>
                 </tr>
                 <tr>
                   <td>Payout</td>
-                  <td className="table-cell" style={{ color: 'green' }}>
+                  <td style={{ color: 'green' }}>
                     {challengeObject.attributes.payout}
                   </td>
                 </tr>
                 <tr>
                   <td>Refund</td>
-                  <td className="table-cell" style={{ color: 'green' }}>
+                  <td style={{ color: 'green' }}>
                     {challengeObject.attributes.refundOnFlee}
                   </td>
                 </tr>
                 <tr>
                   <td>Difficulty</td>
-                  <td className="table-cell" style={{ color: 'crimson' }}>
+                  <td style={{ color: 'crimson' }}>
                     {challengeObject.attributes.difficulty}
                   </td>
                 </tr>
