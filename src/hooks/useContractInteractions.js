@@ -44,7 +44,7 @@ export const useContractInteractions = () => {
       },
     };
     const txReceipt = await Moralis.executeFunction(challengeOptions);
-    console.log(txReceipt);
+    return txReceipt;
   };
 
   const getUserChallenges = async (challengeId) => {
@@ -62,10 +62,44 @@ export const useContractInteractions = () => {
     return txReceipt;
   };
 
+  // Hook called when a user submits a guess to the challenge.
+  const submitAnswer = async (challengeId, guess) => {
+    await Moralis.enableWeb3();
+    const challengeOptions = {
+      contractAddress: contractAddress,
+      abi: contractAbi,
+      functionName: 'submitAnswer',
+      chain: 80001,
+      params: {
+        _challengeId: challengeId,
+        _guess: guess,
+      },
+    };
+    const txReceipt = await Moralis.executeFunction(challengeOptions);
+    return txReceipt;
+  };
+
+  const fleeChallenge = async (challengeId) => {
+    await Moralis.enableWeb3();
+    const challengeOptions = {
+      contractAddress: contractAddress,
+      abi: contractAbi,
+      functionName: 'fleeChallenge',
+      chain: 80001,
+      params: {
+        _challengeId: challengeId,
+      },
+    };
+    const txReceipt = await Moralis.executeFunction(challengeOptions);
+    return txReceipt;
+  };
+
   return {
     contractInstanceWithSigner,
     contractInstanceWithProvider,
     startSChallenge,
     getUserChallenges,
+    submitAnswer,
+    fleeChallenge,
   };
 };
